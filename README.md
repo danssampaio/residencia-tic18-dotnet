@@ -9,3 +9,7 @@
 - Desenvolvimento de APIs RESTful em C# .NET Core 
 - Middleware, Segurança e Autenticação
 - Padrão MVC (Model-View-Controller) em C# .NET Core
+
+### Residente
+
+- Dan Souza Sampaio

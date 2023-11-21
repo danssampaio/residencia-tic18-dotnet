@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text;
 
 Console.InputEncoding = Encoding.UTF8;
@@ -36,7 +36,7 @@ static string cmp(int a, int b)
         return "a é maior que b";
     else if (a < b)
         return "b é maior que a";
-    return "a e b são iguais"
+    return "a e b são iguais";
 }
 
 Console.WriteLine(cmp(a, b));
@@ -48,14 +48,14 @@ Console.WriteLine(cmp(a, b));
 string str1 = "Hello";
 string str2 = "World";
 
-static string cmp(string str1, string str2)
+static string cmp2(string str1, string str2)
 {
     if (str1.Equals(str2))
         return "As strings são iguais";
     return "As strings não são iguais";
 }
 
-Console.WriteLine(cmp(str1, str2));
+Console.WriteLine(cmp2(str1, str2));
 
 #endregion
 
@@ -65,14 +65,14 @@ Console.WriteLine(cmp(str1, str2));
 bool condicao1 = true;
 bool condicao2 = true;
 
-static string cmp(bool condicao1, bool condicao2)
+static string cmp3(bool condicao1, bool condicao2)
 {
     if (condicao1.Equals(condicao2))
         return "As condições são iguais";
     return "As condições não são iguais";
 }
 
-Console.WriteLine(cmp(condicao1, condicao2));
+Console.WriteLine(cmp3(condicao1, condicao2));
 
 #endregion
 

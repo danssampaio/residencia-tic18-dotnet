@@ -1,15 +1,11 @@
 namespace Namespace;
-public class Advogado
+public class Advogado : Pessoa
 {
-    public string? Name { get; set; }
-    public DateTime DataNascimento { get; set; }
-    public string? CPF { get; set; }
-    public string? CNA { get; set; }
-    public Advogado(string? name, DateTime dataNascimento, string? cPF, string? cNA)
+    public string CNA { get; set; }
+
+    public Advogado(string nome, DateTime dataNascimento, string cpf, string cna)
+        : base(nome, dataNascimento, cpf)
     {
-        Name = name;
-        DataNascimento = dataNascimento;
-        CPF = cPF;
-        CNA = cNA;
+        CNA = cna;
     }
 }

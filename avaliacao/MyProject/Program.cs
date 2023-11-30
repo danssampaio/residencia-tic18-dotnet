@@ -70,9 +70,11 @@ class Program
                     Console.WriteLine();
                     break;
                 case "11":
+                    RelatorioClientesPorProfissao();
                     Console.WriteLine();
                     break;
                 case "12":
+                    RelatorioAniversariantesDoMes();
                     Console.WriteLine();
                     break;
                 case "13":
@@ -115,6 +117,7 @@ class Program
 
         Advogado advogado = new Advogado(nome, dataNascimento, cpf, cna);
         escritorio.AdicionarAdvogado(advogado);
+        Console.WriteLine();
     }
 
     static void AdicionarCliente()
@@ -150,6 +153,7 @@ class Program
 
         Cliente cliente = new Cliente(nome, dataNascimento, cpf, estadoCivil, profissao);
         escritorio.AdicionarCliente(cliente);
+        Console.WriteLine();
     }
     static bool ValidarCPF(string cpf)
     {
@@ -165,6 +169,7 @@ class Program
         Console.Write("Digite o CPF do advogado a ser deletado: ");
         string cpfAdvogado = Console.ReadLine() ?? "";
         escritorio.DeletarAdvogado(cpfAdvogado);
+        Console.WriteLine();
     }
 
     static void DeletarCliente(Escritorio escritorio)
@@ -172,6 +177,7 @@ class Program
         Console.Write("Digite o CPF do cliente a ser deletado: ");
         string cpfCliente = Console.ReadLine() ?? "";
         escritorio.DeletarCliente(cpfCliente);
+        Console.WriteLine();
     }
 
     static void RelatorioAdvogadosPorIdade()
@@ -191,6 +197,7 @@ class Program
         {
             Console.WriteLine($"Nome: {advogado.Nome}, Idade: {(DateTime.Now - advogado.DataNascimento).Days / 365}");
         }
+        Console.WriteLine();
     }
 
     static void RelatorioClientesPorIdade()
@@ -210,6 +217,7 @@ class Program
         {
             Console.WriteLine($"Nome: {cliente.Nome}, Idade: {(DateTime.Now - cliente.DataNascimento).Days / 365}");
         }
+        Console.WriteLine();
     }
 
     static void RelatorioClientesPorEstadoCivil()
@@ -225,6 +233,7 @@ class Program
         {
             Console.WriteLine($"Nome: {cliente.Nome}, Estado Civil: {cliente.EstadoCivil}");
         }
+        Console.WriteLine();
     }
 
     static void RelatorioClientesOrdemAlfabetica()
@@ -236,6 +245,41 @@ class Program
         {
             Console.WriteLine($"Nome: {cliente.Nome}");
         }
+        Console.WriteLine();
+    }
+
+    static void RelatorioClientesPorProfissao()
+    {
+        Console.Write("Informe o texto da profissão desejada: ");
+        string textoProfissao = Console.ReadLine() ?? "";
+
+        var clientesPorProfissao = escritorio.Clientes
+            .Where(cliente => cliente.Profissao.Contains(textoProfissao, StringComparison.OrdinalIgnoreCase));
+
+        Console.WriteLine($"Clientes cuja profissão contém '{textoProfissao}':");
+        foreach (var cliente in clientesPorProfissao)
+        {
+            Console.WriteLine($"Nome: {cliente.Nome}, Profissão: {cliente.Profissao}");
+        }
+        Console.WriteLine();
+    }
+
+    static void RelatorioAniversariantesDoMes()
+    {
+        Console.Write("Informe o mês desejado (número): ");
+        int mesAniversario = int.Parse(Console.ReadLine() ?? "0");
+
+        var aniversariantesDoMes = escritorio.Advogados
+            .OfType<Pessoa>()
+            .Concat(escritorio.Clientes)
+            .Where(pessoa => pessoa.DataNascimento.Month == mesAniversario);
+
+        Console.WriteLine($"Aniversariantes do mês {mesAniversario}:");
+        foreach (var pessoa in aniversariantesDoMes)
+        {
+            Console.WriteLine($"Nome: {pessoa.Nome}, Data de Nascimento: {pessoa.DataNascimento:dd/MM/yyyy}");
+        }
+        Console.WriteLine();
     }
 
 }

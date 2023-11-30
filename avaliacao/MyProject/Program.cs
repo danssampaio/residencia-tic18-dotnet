@@ -14,7 +14,13 @@ class Program
             "4. Listar Clientes\n" +
             "5. Deletar Advogado\n" +
             "6. Deletar Cliente\n" +
-            "7. Sair\n");
+            "7. Relatório: Advogados por Idade\n" +
+            "8. Relatório: Clientes por Idade\n" +
+            "9. Relatório: Clientes por Estado Civil\n" +
+            "10. Relatório: Clientes em Ordem Alfabética\n" +
+            "11. Relatório: Clientes por Profissão\n" +
+            "12. Relatório: Aniversariantes do Mês\n" +
+            "13. Sair\n");
 
             Console.Write("Escolha uma opção: ");
             string opcao = Console.ReadLine() ?? "";
@@ -48,6 +54,26 @@ class Program
                     Console.WriteLine();
                     break;
                 case "7":
+                    RelatorioAdvogadosPorIdade();
+                    Console.WriteLine();
+                    break;
+                case "8":
+                    RelatorioClientesPorIdade();
+                    Console.WriteLine();
+                    break;
+                case "9":
+                    Console.WriteLine();
+                    break;
+                case "10":
+                    Console.WriteLine();
+                    break;
+                case "11":
+                    Console.WriteLine();
+                    break;
+                case "12":
+                    Console.WriteLine();
+                    break;
+                case "13":
                     Environment.Exit(0);
                     break;
                 default:
@@ -145,6 +171,47 @@ class Program
         string cpfCliente = Console.ReadLine() ?? "";
         escritorio.DeletarCliente(cpfCliente);
     }
+
+    static void RelatorioAdvogadosPorIdade()
+    {
+        Console.Write("Informe a idade mínima: ");
+        int idadeMinima = int.Parse(Console.ReadLine() ?? "0");
+
+        Console.Write("Informe a idade máxima: ");
+        int idadeMaxima = int.Parse(Console.ReadLine() ?? "999");
+
+        var advogadosPorIdade = escritorio.Advogados
+            .Where(advogado => (DateTime.Now - advogado.DataNascimento).Days / 365 >= idadeMinima
+                && (DateTime.Now - advogado.DataNascimento).Days / 365 <= idadeMaxima);
+
+        Console.WriteLine("Advogados com idade entre os valores informados:");
+        foreach (var advogado in advogadosPorIdade)
+        {
+            Console.WriteLine($"Nome: {advogado.Nome}, Idade: {(DateTime.Now - advogado.DataNascimento).Days / 365}");
+        }
+    }
+
+    static void RelatorioClientesPorIdade()
+    {
+        Console.Write("Informe a idade mínima: ");
+        int idadeMinima = int.Parse(Console.ReadLine() ?? "0");
+
+        Console.Write("Informe a idade máxima: ");
+        int idadeMaxima = int.Parse(Console.ReadLine() ?? "999");
+
+        var clientesPorIdade = escritorio.Clientes
+            .Where(cliente => (DateTime.Now - cliente.DataNascimento).Days / 365 >= idadeMinima
+                && (DateTime.Now - cliente.DataNascimento).Days / 365 <= idadeMaxima);
+
+        Console.WriteLine("Clientes com idade entre os valores informados:");
+        foreach (var cliente in clientesPorIdade)
+        {
+            Console.WriteLine($"Nome: {cliente.Nome}, Idade: {(DateTime.Now - cliente.DataNascimento).Days / 365}");
+        }
+    }
+
+
+
 }
 
 

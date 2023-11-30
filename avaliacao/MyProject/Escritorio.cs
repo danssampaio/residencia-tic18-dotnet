@@ -4,6 +4,9 @@ public class Escritorio
     private List<Advogado> advogados;
     private List<Cliente> clientes;
 
+    public List<Advogado> Advogados => advogados;
+    public List<Cliente> Clientes => clientes;
+
     public Escritorio()
     {
         advogados = new List<Advogado>();

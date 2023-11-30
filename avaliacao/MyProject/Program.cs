@@ -62,9 +62,11 @@ class Program
                     Console.WriteLine();
                     break;
                 case "9":
+                    RelatorioClientesPorEstadoCivil();
                     Console.WriteLine();
                     break;
                 case "10":
+                    RelatorioClientesOrdemAlfabetica();
                     Console.WriteLine();
                     break;
                 case "11":
@@ -210,10 +212,33 @@ class Program
         }
     }
 
+    static void RelatorioClientesPorEstadoCivil()
+    {
+        Console.Write("Informe o estado civil desejado: ");
+        string estadoCivil = Console.ReadLine() ?? "";
 
+        var clientesPorEstadoCivil = escritorio.Clientes
+            .Where(cliente => cliente.EstadoCivil.Equals(estadoCivil, StringComparison.OrdinalIgnoreCase));
+
+        Console.WriteLine($"Clientes com estado civil '{estadoCivil}':");
+        foreach (var cliente in clientesPorEstadoCivil)
+        {
+            Console.WriteLine($"Nome: {cliente.Nome}, Estado Civil: {cliente.EstadoCivil}");
+        }
+    }
+
+    static void RelatorioClientesOrdemAlfabetica()
+    {
+        var clientesOrdenados = escritorio.Clientes.OrderBy(cliente => cliente.Nome);
+
+        Console.WriteLine("Clientes em ordem alfabética:");
+        foreach (var cliente in clientesOrdenados)
+        {
+            Console.WriteLine($"Nome: {cliente.Nome}");
+        }
+    }
 
 }
-
 
 public class CpfNotFoundException : Exception
 {

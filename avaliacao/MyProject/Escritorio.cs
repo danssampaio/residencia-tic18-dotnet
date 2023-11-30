@@ -14,7 +14,7 @@ public class Escritorio
     {
         try
         {
-            if (!advogados.Exists(a => a.CPF == advogado.CPF) && !advogados.Exists(a => a.CNA == advogado.CNA))
+            if (!advogados.Exists(a => a.cpf == advogado.cpf) && !advogados.Exists(a => a.CNA == advogado.CNA))
             {
                 advogados.Add(advogado);
                 Console.WriteLine("Advogado adicionado com sucesso!");
@@ -38,7 +38,7 @@ public class Escritorio
     {
         try
         {
-            if (!clientes.Exists(c => c.CPF == cliente.CPF))
+            if (!clientes.Exists(c => c.cpf == cliente.cpf))
             {
                 clientes.Add(cliente);
                 Console.WriteLine("Cliente adicionado com sucesso!");

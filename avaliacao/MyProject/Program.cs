@@ -7,6 +7,11 @@ public class CpfNotFoundException : Exception
     public CpfNotFoundException() : base("CPF não encontrado."){}
 }
 
+public class CpfIsNotValidException : Exception
+{
+    public CpfIsNotValidException() : base("CPF Inválido."){}
+}
+
 public class CnaNotFoundException : Exception
 {
     public CnaNotFoundException() : base("CNA não encontrado."){}

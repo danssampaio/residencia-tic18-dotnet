@@ -10,7 +10,11 @@ class Program
             Console.WriteLine("---- Menu---- \n" +
             "1. Adicionar Advogado\n" +
             "2. Adicionar Cliente\n" +
-            "3. Sair\n");
+            "3. Listar Advogados\n" +
+            "4. Listar Clientes\n" +
+            "5. Deletar Advogado\n" +
+            "6. Deletar Cliente\n" +
+            "7. Sair\n");
 
             Console.Write("Escolha uma opção: ");
             string opcao = Console.ReadLine() ?? "";
@@ -28,6 +32,22 @@ class Program
                     Console.WriteLine();
                     break;
                 case "3":
+                    escritorio.ListarAdvogados();
+                    Console.WriteLine();
+                    break;
+                case "4":
+                    escritorio.ListarClientes();
+                    Console.WriteLine();
+                    break;
+                case "5":
+                    DeletarAdvogado(escritorio);
+                    Console.WriteLine();
+                    break;
+                case "6":
+                    DeletarCliente(escritorio);
+                    Console.WriteLine();
+                    break;
+                case "7":
                     Environment.Exit(0);
                     break;
                 default:
@@ -43,10 +63,24 @@ class Program
         string nome = Console.ReadLine() ?? "";
 
         Console.Write("Data de Nascimento (DD/MM/AAAA): ");
-        DateTime dataNascimento = DateTime.ParseExact(Console.ReadLine() ?? "", "dd/MM/yyyy", null);
+        DateTime dataNascimento;
+        try
+        {
+            dataNascimento = DateTime.ParseExact(Console.ReadLine() ?? "", "dd/MM/yyyy", null);
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Formato de data inválido. Certifique-se de usar o formato DD/MM/AAAA.");
+            return;
+        }
 
         Console.Write("CPF: ");
         string cpf = Console.ReadLine() ?? "";
+        if (!ValidarCPF(cpf))
+        {
+            Console.WriteLine("CPF inválido. Certifique-se de inserir um CPF válido.");
+            return;
+        }
 
         Console.Write("CNA: ");
         string cna = Console.ReadLine() ?? "";
@@ -61,10 +95,24 @@ class Program
         string nome = Console.ReadLine() ?? "";
 
         Console.Write("Data de Nascimento (DD/MM/AAAA): ");
-        DateTime dataNascimento = DateTime.ParseExact(Console.ReadLine() ?? "", "dd/MM/yyyy", null);
+        DateTime dataNascimento;
+        try
+        {
+            dataNascimento = DateTime.ParseExact(Console.ReadLine() ?? "", "dd/MM/yyyy", null);
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Formato de data inválido. Certifique-se de usar o formato DD/MM/AAAA.");
+            return;
+        }
 
         Console.Write("CPF: ");
         string cpf = Console.ReadLine() ?? "";
+        if (!ValidarCPF(cpf))
+        {
+            Console.WriteLine("CPF inválido. Certifique-se de inserir um CPF válido.");
+            return;
+        }
 
         Console.Write("Estado Civil: ");
         string estadoCivil = Console.ReadLine() ?? "";
@@ -74,6 +122,28 @@ class Program
 
         Cliente cliente = new Cliente(nome, dataNascimento, cpf, estadoCivil, profissao);
         escritorio.AdicionarCliente(cliente);
+    }
+    static bool ValidarCPF(string cpf)
+    {
+        if (cpf.Length == 11 && cpf.All(char.IsDigit))
+            return true;
+        else
+            return false;
+    }
+
+
+    static void DeletarAdvogado(Escritorio escritorio)
+    {
+        Console.Write("Digite o CPF do advogado a ser deletado: ");
+        string cpfAdvogado = Console.ReadLine() ?? "";
+        escritorio.DeletarAdvogado(cpfAdvogado);
+    }
+
+    static void DeletarCliente(Escritorio escritorio)
+    {
+        Console.Write("Digite o CPF do cliente a ser deletado: ");
+        string cpfCliente = Console.ReadLine() ?? "";
+        escritorio.DeletarCliente(cpfCliente);
     }
 }
 

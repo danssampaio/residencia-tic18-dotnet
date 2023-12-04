@@ -10,12 +10,13 @@ public class Escritorio
 
     private List<CasoJuridico> casosJuridicos;
     public List<CasoJuridico> CasosJuridicos => casosJuridicos;
-    
+
     public Escritorio()
     {
         advogados = new List<Advogado>();
         clientes = new List<Cliente>();
         documentos = new List<Documento>();
+        casosJuridicos = new List<CasoJuridico>();
     }
 
     public void AdicionarAdvogado(Advogado advogado)
@@ -137,4 +138,79 @@ public class Escritorio
             Console.WriteLine($"Erro inesperado ao deletar cliente: {ex.Message}");
         }
     }
+public void AdicionarCasoJuridico(CasoJuridico casoJuridico)
+    {
+        casosJuridicos.Add(casoJuridico);
+        Console.WriteLine("Caso Jurídico adicionado com sucesso!");
+    }
+
+
+    public void ListarCasosJuridicos()
+    {
+        Console.WriteLine("Lista de Casos Jurídicos:");
+        foreach (var casoJuridico in casosJuridicos)
+        {
+            ExibirInformacoesCasoJuridico(casoJuridico);
+            Console.WriteLine();
+        }
+    }
+
+    public void DeletarCasoJuridico(DateTime abertura)
+    {
+        var casoJuridico = casosJuridicos.Find(c => c.Abertura == abertura);
+
+        if (casoJuridico != null)
+        {
+            casosJuridicos.Remove(casoJuridico);
+            Console.WriteLine("Caso Jurídico deletado com sucesso!");
+        }
+        else
+        {
+            Console.WriteLine("Caso Jurídico não encontrado.");
+        }
+    }
+
+    private void ExibirInformacoesCasoJuridico(CasoJuridico casoJuridico)
+    {
+        Console.WriteLine($"Abertura: {casoJuridico.Abertura:dd/MM/yyyy}");
+        Console.WriteLine($"Probabilidade de Sucesso: {casoJuridico.ProbabilidadeSucesso}%");
+        Console.WriteLine($"Encerramento: {casoJuridico.Encerramento:dd/MM/yyyy}");
+        Console.WriteLine($"Status: {casoJuridico.Status ?? "N/A"}");
+
+        if (casoJuridico.Cliente != null)
+        {
+            Console.WriteLine("Informações do Cliente:");
+            Console.WriteLine($"Nome: {casoJuridico.Cliente.Nome}");
+            Console.WriteLine($"CPF: {casoJuridico.Cliente.CPF}");
+        }
+
+        if (casoJuridico.Advogados != null && casoJuridico.Advogados.Count > 0)
+        {
+            Console.WriteLine("Advogados Envolvidos:");
+            foreach (var advogado in casoJuridico.Advogados)
+            {
+                Console.WriteLine($"Nome: {advogado.Nome}, CPF: {advogado.CPF}");
+            }
+        }
+
+        if (casoJuridico.Documentos != null && casoJuridico.Documentos.Count > 0)
+        {
+            Console.WriteLine("Documentos Associados:");
+            foreach (var documento in casoJuridico.Documentos)
+            {
+                casoJuridico.ExibirInformacoesDocumento(documento);
+                Console.WriteLine();
+            }
+        }
+
+        if (casoJuridico.Custos != null && casoJuridico.Custos.Count > 0)
+        {
+            Console.WriteLine("Custos Associados:");
+            foreach (var custo in casoJuridico.Custos)
+            {
+                Console.WriteLine($"Valor: {custo.Custos}, Descrição: {custo.Descricao}");
+            }
+        }
+    }
+
 }

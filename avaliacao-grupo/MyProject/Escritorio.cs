@@ -8,6 +8,9 @@ public class Escritorio
     private List<Documento> documentos;
     public List<Documento> Documentos => documentos;
 
+    private List<CasoJuridico> casosJuridicos;
+    public List<CasoJuridico> CasosJuridicos => casosJuridicos;
+    
     public Escritorio()
     {
         advogados = new List<Advogado>();

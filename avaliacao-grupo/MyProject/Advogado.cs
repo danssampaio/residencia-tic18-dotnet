@@ -1,4 +1,4 @@
-namespace Namespace;
+namespace EscritorioJuridico;
 public class Advogado : Pessoa
 {
     public string CNA { get; set; }

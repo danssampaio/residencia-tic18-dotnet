@@ -1,4 +1,4 @@
-namespace Namespace;
+namespace EscritorioJuridico;
 public class CasoJuridico
 {
     public DateTime Abertura { get; set; }

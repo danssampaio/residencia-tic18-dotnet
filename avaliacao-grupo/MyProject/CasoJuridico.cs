@@ -66,7 +66,7 @@ public class CasoJuridico
         }
     }
 
-    private void ExibirInformacoesDocumento(Documento documento)
+    public void ExibirInformacoesDocumento(Documento documento)
     {
         Console.WriteLine($"Código: {documento.Codigo}");
         Console.WriteLine($"Tipo: {documento.Tipo ?? "N/A"}");

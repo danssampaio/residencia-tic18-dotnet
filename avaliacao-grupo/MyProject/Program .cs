@@ -511,3 +511,10 @@ public class MaritalStatusException : Exception
 {
     public MaritalStatusException() : base("Estado civíl inválido.") { }
 }
+
+public class DocumentoNaoEncontradoException : Exception
+{
+    public DocumentoNaoEncontradoException() : base("Documento não encontrado.")
+    {
+    }
+}

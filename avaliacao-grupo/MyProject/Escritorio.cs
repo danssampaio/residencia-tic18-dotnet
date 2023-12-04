@@ -134,43 +134,4 @@ public class Escritorio
             Console.WriteLine($"Erro inesperado ao deletar cliente: {ex.Message}");
         }
     }
-
-    public void AdicionarDocumento(Documento documento)
-    {
-        documentos.Add(documento);
-        Console.WriteLine("Documento adicionado com sucesso!");
-    }
-
-    public void ListarDocumentos()
-    {
-        Console.WriteLine("Lista de Documentos:");
-        foreach (var documento in documentos)
-        {
-            ExibirInformacoesDocumento(documento);
-            Console.WriteLine();
-        }
-    }
-
-    public void DeletarDocumento(int codigo)
-    {
-        var documento = documentos.Find(d => d.Codigo == codigo);
-
-        if (documento != null)
-        {
-            documentos.Remove(documento);
-            Console.WriteLine("Documento deletado com sucesso!");
-        }
-        else
-        {
-            Console.WriteLine("Documento não encontrado.");
-        }
-    }
-
-    private void ExibirInformacoesDocumento(Documento documento)
-    {
-        Console.WriteLine($"Código: {documento.Codigo}");
-        Console.WriteLine($"Tipo: {documento.Tipo ?? "N/A"}");
-        Console.WriteLine($"Descrição: {documento.Descricao ?? "N/A"}");
-        Console.WriteLine($"Data de Modificação: {documento.DataDeModificacao:dd/MM/yyyy}");
-    }
 }

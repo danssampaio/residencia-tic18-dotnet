@@ -1,4 +1,4 @@
-namespace Namespace;
+namespace EscritorioJuridico;
 public class Cliente : Pessoa
 {
     public string EstadoCivil { get; set; }

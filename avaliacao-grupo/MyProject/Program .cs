@@ -1,4 +1,4 @@
-﻿namespace Namespace;
+﻿namespace EscritorioJuridico;
 class Program
 {
     static Escritorio escritorio = new Escritorio();
@@ -42,6 +42,8 @@ class Program
             }
         }
     }
+
+    // ------- Menus -------
 
     static void MenuCliente()
     {
@@ -209,7 +211,7 @@ class Program
             }
         }
     }
-    
+
     static void MenuDocumento()
     {
         while (true)
@@ -248,7 +250,9 @@ class Program
         }
     }
 
-
+    
+    // ----- Funções Advogado -------
+    
     static void AdicionarAdvogado()
     {
         Console.Write("Nome: ");
@@ -282,6 +286,17 @@ class Program
         Console.WriteLine();
     }
 
+    static void DeletarAdvogado(Escritorio escritorio)
+
+    {
+        Console.Write("Digite o CPF do advogado a ser deletado: ");
+        string cpfAdvogado = Console.ReadLine() ?? "";
+        escritorio.DeletarAdvogado(cpfAdvogado);
+        Console.WriteLine();
+    }
+
+    // ------- Funções Cliente -------
+    
     static void AdicionarCliente()
     {
         Console.Write("Nome: ");
@@ -325,6 +340,18 @@ class Program
         escritorio.AdicionarCliente(cliente);
         Console.WriteLine();
     }
+
+    static void DeletarCliente(Escritorio escritorio)
+    {
+        Console.Write("Digite o CPF do cliente a ser deletado: ");
+        string cpfCliente = Console.ReadLine() ?? "";
+        escritorio.DeletarCliente(cpfCliente);
+        Console.WriteLine();
+    }
+
+    
+    // ------- Validações -------
+    
     static bool ValidarCPF(string cpf)
     {
         if (cpf.Length == 11 && cpf.All(char.IsDigit))
@@ -341,23 +368,9 @@ class Program
             return false;
     }
 
-
-    static void DeletarAdvogado(Escritorio escritorio)
-    {
-        Console.Write("Digite o CPF do advogado a ser deletado: ");
-        string cpfAdvogado = Console.ReadLine() ?? "";
-        escritorio.DeletarAdvogado(cpfAdvogado);
-        Console.WriteLine();
-    }
-
-    static void DeletarCliente(Escritorio escritorio)
-    {
-        Console.Write("Digite o CPF do cliente a ser deletado: ");
-        string cpfCliente = Console.ReadLine() ?? "";
-        escritorio.DeletarCliente(cpfCliente);
-        Console.WriteLine();
-    }
-
+    
+    // ------- Relatórios -------
+    
     static void RelatorioAdvogadosPorIdade()
     {
         Console.Write("Informe a idade mínima: ");
@@ -497,4 +510,11 @@ public class RepeatedRegisterClientException : Exception
 public class MaritalStatusException : Exception
 {
     public MaritalStatusException() : base("Estado civíl inválido.") { }
+}
+
+public class DocumentoNaoEncontradoException : Exception
+{
+    public DocumentoNaoEncontradoException() : base("Documento não encontrado.")
+    {
+    }
 }

@@ -1,4 +1,4 @@
-namespace Namespace;
+namespace EscritorioJuridico;
 public class Documento
 {
 
@@ -14,5 +14,4 @@ public class Documento
         Tipo = tipo;
         Descricao = descricao;
     }
-
 }

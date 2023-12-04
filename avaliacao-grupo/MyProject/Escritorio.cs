@@ -1,16 +1,18 @@
-namespace Namespace;
+namespace EscritorioJuridico;
 public class Escritorio
 {
     private List<Advogado> advogados;
-    private List<Cliente> clientes;
-
     public List<Advogado> Advogados => advogados;
+    private List<Cliente> clientes;
     public List<Cliente> Clientes => clientes;
+    private List<Documento> documentos;
+    public List<Documento> Documentos => documentos;
 
     public Escritorio()
     {
         advogados = new List<Advogado>();
         clientes = new List<Cliente>();
+        documentos = new List<Documento>();
     }
 
     public void AdicionarAdvogado(Advogado advogado)

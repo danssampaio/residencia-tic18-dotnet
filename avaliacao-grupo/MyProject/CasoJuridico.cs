@@ -24,6 +24,13 @@ public class CasoJuridico
         Cliente = cliente;
         Status = status;
     }
+
+    public void AtualizarCasoJuridico(CasoJuridico casoJuridico, string novoStatus)
+    {
+        casoJuridico.Status = novoStatus;
+        Console.WriteLine("Caso Jurídico atualizado com sucesso!");
+    }
+
     public void AdicionarDocumento(Documento documento)
     {
         Documentos.Add(documento);

@@ -200,7 +200,7 @@ class Program
                     Console.WriteLine();
                     break;
                 case "3":
-                    //DeletarCasoJuridico(escritorio);
+                    //AtualizarCasoJuridico();
                     Console.WriteLine();
                     break;
                 case "4":
@@ -349,7 +349,24 @@ class Program
         Console.WriteLine();
     }
 
-    
+
+    // ------- Funções CasoJuridico --------
+
+    static void IniciarCasoJuridico()
+    {
+        // Implementar a lógica para iniciar um caso jurídico de acordo com as regras de negócio
+    }
+
+    static void AtualizarCasoJuridico()
+    {
+        // Implementar a lógica para atualizar um caso jurídico de acordo com as regras de negócio
+    }
+
+    static void ListarCasosJuridicos()
+    {
+        // Implementar a lógica para listar os casos juridicos
+    }
+
     // ------- Validações -------
     
     static bool ValidarCPF(string cpf)
@@ -487,16 +504,6 @@ public class CpfNotFoundException : Exception
     public CpfNotFoundException() : base("CPF não encontrado.") { }
 }
 
-public class CpfIsNotValidException : Exception
-{
-    public CpfIsNotValidException() : base("CPF Inválido.") { }
-}
-
-public class CnaNotFoundException : Exception
-{
-    public CnaNotFoundException() : base("CNA não encontrado.") { }
-}
-
 public class RepeatedRegisterAttorneyException : Exception
 {
     public RepeatedRegisterAttorneyException() : base("CPF ou CNA já cadastrado.") { }
@@ -507,14 +514,7 @@ public class RepeatedRegisterClientException : Exception
     public RepeatedRegisterClientException() : base("CPF já cadastrado.") { }
 }
 
-public class MaritalStatusException : Exception
-{
-    public MaritalStatusException() : base("Estado civíl inválido.") { }
-}
-
 public class DocumentoNaoEncontradoException : Exception
 {
-    public DocumentoNaoEncontradoException() : base("Documento não encontrado.")
-    {
-    }
+    public DocumentoNaoEncontradoException() : base("Documento não encontrado.") { }
 }

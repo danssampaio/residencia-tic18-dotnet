@@ -25,6 +25,15 @@ public class CasoJuridico
         Status = status;
     }
 
+    public CasoJuridico(DateTime abertura, float probabilidadeSucesso, Cliente? cliente, string? status)
+    {
+        Abertura = abertura;
+        ProbabilidadeSucesso = probabilidadeSucesso;
+        Cliente = cliente;
+        Status = status;
+    }
+
+    
     public void AtualizarCasoJuridico(CasoJuridico casoJuridico, string novoStatus)
     {
         casoJuridico.Status = novoStatus;

@@ -192,7 +192,7 @@ class Program
             switch (opcaoMenuCasoJuridico)
             {
                 case "1":
-                    //AdicionarCasoJuridico();
+                    AdicionarCasoJuridico();
                     Console.WriteLine();
                     break;
                 case "2":
@@ -355,7 +355,14 @@ class Program
     static void AdicionarCasoJuridico()
     {
         // Implementar a lógica para iniciar um caso jurídico de acordo com as regras de negócio
-        
+        DateTime abertura = DateTime.Now;
+
+        Console.WriteLine($"Qual a probabilidade de sucesso do caso? (0-100): ");
+        float probabilidadeDeSucesso = float.Parse(Console.ReadLine() ?? "0");
+        string status = "Aberto";
+
+        Cliente clienteAux = new Cliente("nome", DateTime.Now, "cpf", "estadoCivil", "profissao");
+        CasoJuridico casoJuridico = new CasoJuridico(abertura, probabilidadeDeSucesso, clienteAux, status);
     }
 
     static void AtualizarCasoJuridico()

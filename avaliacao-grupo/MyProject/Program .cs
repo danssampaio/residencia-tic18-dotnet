@@ -355,7 +355,6 @@ class Program
     static void AdicionarCasoJuridico()
     {
         // Implementar a lógica para iniciar um caso jurídico de acordo com as regras de negócio
-        var abertura = DateTime.Now;
         
     }
 
@@ -579,4 +578,9 @@ public class RepeatedRegisterClientException : Exception
 public class DocumentoNaoEncontradoException : Exception
 {
     public DocumentoNaoEncontradoException() : base("Documento não encontrado.") { }
+}
+
+public class CustoNaoEncontradoException : Exception
+{
+    public CustoNaoEncontradoException() : base("Custo não encontrado.") { }
 }

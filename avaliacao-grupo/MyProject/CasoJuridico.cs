@@ -80,4 +80,52 @@ public class CasoJuridico
         Console.WriteLine($"Descrição: {documento.Descricao ?? "N/A"}");
         Console.WriteLine($"Data de Modificação: {documento.DataDeModificacao:dd/MM/yyyy}");
     }
+
+    public void AdicionarCusto(float custo, string descricao)
+    {
+        if (Custos == null)
+        {
+            Custos = new List<(float Custos, string Descricao)>();
+        }
+
+        Custos.Add((custo, descricao));
+        Console.WriteLine("Custo adicionado ao Caso Jurídico com sucesso!");
+    }
+
+    public void ListarCustos()
+    {
+        Console.WriteLine("Custos Associados ao Caso Jurídico:");
+        foreach (var custo in Custos)
+        {
+            Console.WriteLine($"Valor: {custo.Custos}, Descrição: {custo.Descricao}");
+        }
+    }
+
+    public void DeletarCusto(string descricao)
+    {
+        try
+        {
+            var custo = Custos?.Find(c => c.Descricao == descricao);
+
+            if (custo != null)
+            {
+                Custos?.Remove(custo.Value);
+                Console.WriteLine("Custo deletado com sucesso!!!\n");
+            }
+            else
+            {
+                throw new CustoNaoEncontradoException();
+            }
+        }
+        catch (CustoNaoEncontradoException ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Ocorreu um erro: {ex.Message}");
+        }
+    }
+
+
 }

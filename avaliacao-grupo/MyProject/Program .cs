@@ -230,15 +230,15 @@ class Program
             switch (opcaoMenuDocumento)
             {
                 case "1":
-                    //AdicionarDocumento();
+                    AdicionarDocumento();
                     Console.WriteLine();
                     break;
                 case "2":
-                    //escritorio.ListarDocumentos();
+                    ListarDocumentos();
                     Console.WriteLine();
                     break;
                 case "3":
-                    //DeletarDocumento(escritorio);
+                    DeletarDocumento();
                     Console.WriteLine();
                     break;
                 case "4":
@@ -352,9 +352,10 @@ class Program
 
     // ------- Funções CasoJuridico --------
 
-    static void IniciarCasoJuridico()
+    static void AdicionarCasoJuridico()
     {
         // Implementar a lógica para iniciar um caso jurídico de acordo com as regras de negócio
+        
     }
 
     static void AtualizarCasoJuridico()
@@ -366,6 +367,66 @@ class Program
     {
         // Implementar a lógica para listar os casos juridicos
     }
+
+    // ------- Funções Documento --------//
+
+    static Documento AdicionarDocumento()
+    {
+        // Implementar a lógica para adicionar um documento de acordo com as regras de negócio
+        var DataDeModificacao = DateTime.Now;
+
+        Console.WriteLine($"Codigo: ");
+        int codigo = int.Parse(Console.ReadLine() ?? "0");
+
+        Console.WriteLine($"Tipo: ");
+        string tipo = Console.ReadLine() ?? "";
+
+        Console.WriteLine($"Descrição: ");
+        string descricao = Console.ReadLine() ?? "";
+
+        Documento documento = new Documento(DataDeModificacao, codigo, tipo, descricao);
+        return documento;  
+    }
+
+    static void ListarDocumentos()
+    {
+        // Implementar a lógica para listar os documentos
+        foreach (var casojuridico in escritorio.CasosJuridicos)
+                    {
+                        foreach (var documento in casojuridico.Documentos)
+                        {
+                            Console.WriteLine($"Código: {documento.Codigo}");
+                            Console.WriteLine($"Tipo: {documento.Tipo ?? "N/A"}");
+                            Console.WriteLine($"Descrição: {documento.Descricao ?? "N/A"}");
+                            Console.WriteLine($"Data de Modificação: {documento.DataDeModificacao:dd/MM/yyyy}");
+                            Console.WriteLine();
+                        }
+                        Console.WriteLine();
+                    }
+    }
+
+    static void DeletarDocumento()
+    {
+        // Implementar a lógica para deletar um documento de acordo com as regras de negócio
+        Console.WriteLine("Digite o código do documento a ser deletado: ");
+        int codigoDocumento = int.Parse(Console.ReadLine() ?? "0");
+        foreach (var casojuridico in escritorio.CasosJuridicos)
+                    {
+                        foreach (var documento in casojuridico.Documentos)
+                        {
+                            if (documento.Codigo == codigoDocumento)
+                            {
+                                casojuridico.Documentos.Remove(documento);
+                                Console.WriteLine("Documento deletado com sucesso!!!\n");
+                            }
+                            else
+                            {
+                                throw new DocumentoNaoEncontradoException();
+                            }
+                        }
+                    }
+    }
+    
 
     // ------- Validações -------
     
@@ -517,4 +578,9 @@ public class RepeatedRegisterClientException : Exception
 public class DocumentoNaoEncontradoException : Exception
 {
     public DocumentoNaoEncontradoException() : base("Documento não encontrado.") { }
+}
+
+public class CustoNaoEncontradoException : Exception
+{
+    public CustoNaoEncontradoException() : base("Custo não encontrado.") { }
 }

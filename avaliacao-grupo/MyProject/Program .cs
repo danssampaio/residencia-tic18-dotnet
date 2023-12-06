@@ -230,7 +230,7 @@ class Program
             switch (opcaoMenuDocumento)
             {
                 case "1":
-                    //AdicionarDocumento();
+                    AdicionarDocumento();
                     Console.WriteLine();
                     break;
                 case "2":
@@ -352,9 +352,11 @@ class Program
 
     // ------- Funções CasoJuridico --------
 
-    static void IniciarCasoJuridico()
+    static void AdicionarCasoJuridico()
     {
         // Implementar a lógica para iniciar um caso jurídico de acordo com as regras de negócio
+        var abertura = DateTime.Now;
+        
     }
 
     static void AtualizarCasoJuridico()
@@ -366,6 +368,29 @@ class Program
     {
         // Implementar a lógica para listar os casos juridicos
     }
+
+    // ------- Funções CasoJuridico --------
+
+    static Documento AdicionarDocumento()
+    {
+        // Implementar a lógica para adicionar um documento de acordo com as regras de negócio
+        var DataDeModificacao = DateTime.Now;
+
+        Console.WriteLine($"Codigo: ");
+        int codigo = int.Parse(Console.ReadLine() ?? "0");
+
+        Console.WriteLine($"Tipo: ");
+        string tipo = Console.ReadLine() ?? "";
+
+        Console.WriteLine($"Descrição: ");
+        string descricao = Console.ReadLine() ?? "";
+
+        Documento documento = new Documento(DataDeModificacao, codigo, tipo, descricao);
+        return documento;
+        
+        
+    }
+    
 
     // ------- Validações -------
     

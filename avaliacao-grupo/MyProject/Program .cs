@@ -234,7 +234,8 @@ class Program
                     Console.WriteLine();
                     break;
                 case "2":
-                    //escritorio.ListarDocumentos();
+                    Console.WriteLine("Documentos Associados ao Caso Jurídico:");
+                    ListarDocumentos();
                     Console.WriteLine();
                     break;
                 case "3":
@@ -369,7 +370,7 @@ class Program
         // Implementar a lógica para listar os casos juridicos
     }
 
-    // ------- Funções CasoJuridico --------
+    // ------- Funções Documento --------//
 
     static Documento AdicionarDocumento()
     {
@@ -386,9 +387,24 @@ class Program
         string descricao = Console.ReadLine() ?? "";
 
         Documento documento = new Documento(DataDeModificacao, codigo, tipo, descricao);
-        return documento;
-        
-        
+        return documento;  
+    }
+
+    static void ListarDocumentos()
+    {
+        // Implementar a lógica para listar os documentos
+        foreach (var casojuridico in escritorio.CasosJuridicos)
+                    {
+                        foreach (var documento in casojuridico.Documentos)
+                        {
+                            Console.WriteLine($"Código: {documento.Codigo}");
+                            Console.WriteLine($"Tipo: {documento.Tipo ?? "N/A"}");
+                            Console.WriteLine($"Descrição: {documento.Descricao ?? "N/A"}");
+                            Console.WriteLine($"Data de Modificação: {documento.DataDeModificacao:dd/MM/yyyy}");
+                            Console.WriteLine();
+                        }
+                        Console.WriteLine();
+                    }
     }
     
 

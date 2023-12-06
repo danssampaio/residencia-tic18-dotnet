@@ -234,12 +234,11 @@ class Program
                     Console.WriteLine();
                     break;
                 case "2":
-                    Console.WriteLine("Documentos Associados ao Caso Jurídico:");
                     ListarDocumentos();
                     Console.WriteLine();
                     break;
                 case "3":
-                    //DeletarDocumento(escritorio);
+                    DeletarDocumento();
                     Console.WriteLine();
                     break;
                 case "4":
@@ -404,6 +403,28 @@ class Program
                             Console.WriteLine();
                         }
                         Console.WriteLine();
+                    }
+    }
+
+    static void DeletarDocumento()
+    {
+        // Implementar a lógica para deletar um documento de acordo com as regras de negócio
+        Console.WriteLine("Digite o código do documento a ser deletado: ");
+        int codigoDocumento = int.Parse(Console.ReadLine() ?? "0");
+        foreach (var casojuridico in escritorio.CasosJuridicos)
+                    {
+                        foreach (var documento in casojuridico.Documentos)
+                        {
+                            if (documento.Codigo == codigoDocumento)
+                            {
+                                casojuridico.Documentos.Remove(documento);
+                                Console.WriteLine("Documento deletado com sucesso!!!\n");
+                            }
+                            else
+                            {
+                                throw new DocumentoNaoEncontradoException();
+                            }
+                        }
                     }
     }
     

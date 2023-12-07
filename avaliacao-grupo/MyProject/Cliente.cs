@@ -1,13 +1,19 @@
-namespace EscritorioJuridico;
-public class Cliente : Pessoa
+namespace EscritorioJuridico
 {
-    public string EstadoCivil { get; set; }
-    public string Profissao { get; set; }
-
-    public Cliente(string nome, DateTime dataNascimento, string cpf, string estadoCivil, string profissao)
-        : base(nome, dataNascimento, cpf)
+    public class Cliente : Pessoa
     {
-        EstadoCivil = estadoCivil;
-        Profissao = profissao;
+        public string EstadoCivil { get; set; }
+        public string Profissao { get; set; }
+
+        public List<IPagamento> Pagamentos {get; set;}
+
+        public PlanoConsultoria? Plano { get; set; }
+
+        public Cliente(string nome, DateTime dataNascimento, string cpf, string estadoCivil, string profissao)
+            : base(nome, dataNascimento, cpf)
+        {
+            EstadoCivil = estadoCivil;
+            Profissao = profissao;
+        }
     }
 }

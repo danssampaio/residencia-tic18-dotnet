@@ -5,9 +5,6 @@ public class Escritorio
     public List<Advogado> Advogados => advogados;
     private List<Cliente> clientes;
     public List<Cliente> Clientes => clientes;
-    private List<Documento> documentos;
-    public List<Documento> Documentos => documentos;
-
     private List<CasoJuridico> casosJuridicos;
     public List<CasoJuridico> CasosJuridicos => casosJuridicos;
 
@@ -15,7 +12,6 @@ public class Escritorio
     {
         advogados = new List<Advogado>();
         clientes = new List<Cliente>();
-        documentos = new List<Documento>();
         casosJuridicos = new List<CasoJuridico>();
     }
 
@@ -122,7 +118,7 @@ public class Escritorio
             if (cpfCliente != null)
             {
                 clientes.Remove(cpfCliente);
-                Console.WriteLine("Cliente deletado com sucesso!");
+                Console.WriteLine("Cliente deletado com sucesso!\n");
             }
             else
             {
@@ -138,7 +134,7 @@ public class Escritorio
             Console.WriteLine($"Erro inesperado ao deletar cliente: {ex.Message}");
         }
     }
-public void AdicionarCasoJuridico(CasoJuridico casoJuridico)
+    public void AdicionarCasoJuridico(CasoJuridico casoJuridico)
     {
         casosJuridicos.Add(casoJuridico);
         Console.WriteLine("Caso Jurídico adicionado com sucesso!");
@@ -155,9 +151,9 @@ public void AdicionarCasoJuridico(CasoJuridico casoJuridico)
         }
     }
 
-    public void DeletarCasoJuridico(DateTime abertura)
+    public void DeletarCasoJuridico(string codigo)
     {
-        var casoJuridico = casosJuridicos.Find(c => c.Abertura == abertura);
+        var casoJuridico = casosJuridicos.Find(c => c.Codigo == codigo);
 
         if (casoJuridico != null)
         {
@@ -170,8 +166,25 @@ public void AdicionarCasoJuridico(CasoJuridico casoJuridico)
         }
     }
 
+
+    public void AtualizarCasoJuridico(string codigo, string novoStatus)
+    {
+        CasoJuridico? casoParaAtualizar = casosJuridicos.Find(c => c.Codigo == codigo);
+
+        if (casoParaAtualizar != null)
+        {
+            casoParaAtualizar.Status = novoStatus;
+            Console.WriteLine("Caso Jurídico atualizado com sucesso!\n");
+        }
+        else
+        {
+            Console.WriteLine($"Caso Jurídico com código {codigo} não encontrado.\n");
+        }
+    }
+
     private void ExibirInformacoesCasoJuridico(CasoJuridico casoJuridico)
     {
+        Console.WriteLine($"Código: {casoJuridico.Codigo:dd/MM/yyyy}");
         Console.WriteLine($"Abertura: {casoJuridico.Abertura:dd/MM/yyyy}");
         Console.WriteLine($"Probabilidade de Sucesso: {casoJuridico.ProbabilidadeSucesso}%");
         Console.WriteLine($"Encerramento: {casoJuridico.Encerramento:dd/MM/yyyy}");
@@ -205,11 +218,16 @@ public void AdicionarCasoJuridico(CasoJuridico casoJuridico)
 
         if (casoJuridico.Custos != null && casoJuridico.Custos.Count > 0)
         {
+            float somaCustos = 0;
             Console.WriteLine("Custos Associados:");
+
             foreach (var custo in casoJuridico.Custos)
             {
                 Console.WriteLine($"Valor: {custo.Custos}, Descrição: {custo.Descricao}");
+                somaCustos += custo.Custos;
             }
+
+            Console.WriteLine($"Total de Custos: {somaCustos}");
         }
     }
 

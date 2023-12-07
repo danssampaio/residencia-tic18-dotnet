@@ -132,7 +132,12 @@ class Program
             "4. Relatório: Clientes em Ordem Alfabética\n" +
             "5. Relatório: Clientes por Profissão\n" +
             "6. Relatório: Aniversariantes do Mês\n" +
-            "7. Voltar ao Menu Principal\n");
+            "7. Relatório: Casos em Aberto em ordem crescente pela data de inicio\n" +
+            "8. Relatório: Advogados em ordem decrescente pela quantidade de casos de  casos com status Concluídos\n" +
+            "9. Relatório: Casos com Custo contendo uma palavra na descrição\n" +
+            "10. Relatório: Top 10 Tipos de Documentos mais inseridos nos casos\n" +
+            "11. Voltar ao Menu Principal\n");
+
 
             Console.Write("Escolha uma opção: ");
             string opcaoMenuRelatorio = Console.ReadLine() ?? "";
@@ -166,10 +171,29 @@ class Program
                     Console.WriteLine();
                     break;
                 case "7":
-                    return;
-                default:
-                    Console.WriteLine("Opção inválida. Tente novamente.");
-                    break;
+                        ConsultaCasosEmAberto();
+                        Console.WriteLine();
+                        break;
+                    case "8":
+                        ConsultaAdvogadosPorQuantidadeCasosConcluidos();
+                        Console.WriteLine();
+                        break;
+                    case "9":
+                        Console.Write("Informe a palavra desejada para consulta: ");
+                        string palavraConsulta = Console.ReadLine() ?? "";
+                        ConsultaCasosComCustoPorPalavra(palavraConsulta);
+                        Console.WriteLine();
+                        break;
+                    case "10":
+                        ConsultaTop10TiposDocumentos();
+                        Console.WriteLine();
+                        break;
+                    case "11":
+                        return;
+                    default:
+                        Console.WriteLine("Opção inválida. Tente novamente.");
+                        break;
+               
             }
         }
     }
@@ -557,6 +581,69 @@ class Program
         }
         Console.WriteLine();
     }
+    static void ConsultaCasosEmAberto()
+{
+    var casosEmAberto = escritorio.CasosJuridicos
+        .Where(caso => caso.Status?.Equals("Em aberto", StringComparison.OrdinalIgnoreCase) == true)
+        .OrderBy(caso => caso.Abertura);
+
+    Console.WriteLine("Casos em aberto em ordem crescente pela data de início:");
+    foreach (var caso in casosEmAberto)
+    {
+        Console.WriteLine($"Data de Início: {caso.Abertura:dd/MM/yyyy}, Status: {caso.Status ?? "N/A"}");
+    }
+    Console.WriteLine();
+}
+
+static void ConsultaAdvogadosPorQuantidadeCasosConcluidos()
+{
+    var advogadosPorQuantidadeCasosConcluidos = escritorio.Advogados
+        .OrderByDescending(advogado => escritorio.CasosJuridicos
+            .Count(caso => caso.Status?.Equals("Concluído", StringComparison.OrdinalIgnoreCase) == true && caso.Advogados.Any(adv => adv == advogado)));
+
+    Console.WriteLine("Advogados em ordem decrescente pela quantidade de casos concluídos:");
+    foreach (var advogado in advogadosPorQuantidadeCasosConcluidos)
+    {
+        int casosConcluidos = escritorio.CasosJuridicos
+            .Count(caso => caso.Status?.Equals("Concluído", StringComparison.OrdinalIgnoreCase) == true && caso.Advogados.Any(adv => adv == advogado));
+
+        Console.WriteLine($"Nome: {advogado.Nome}, Casos Concluídos: {casosConcluidos}");
+    }
+    Console.WriteLine();
+}
+static void ConsultaCasosComCustoPorPalavra(string palavra)
+{
+    var casosComCustoPorPalavra = escritorio.CasosJuridicos
+        .Where(caso => caso.Custos?.Any(custo => custo.Descricao?.Contains(palavra, StringComparison.OrdinalIgnoreCase) == true) == true);
+
+    Console.WriteLine($"Casos com custo contendo a palavra '{palavra}':");
+    foreach (var caso in casosComCustoPorPalavra)
+    {
+        Console.WriteLine($"Data de Início: {caso.Abertura:dd/MM/yyyy}, Status: {caso.Status ?? "N/A"}");
+    }
+    Console.WriteLine();
+}
+
+
+static void ConsultaTop10TiposDocumentos()
+{
+    var documentosPorTipo = escritorio.CasosJuridicos
+        .SelectMany(caso => caso.Documentos)
+        .GroupBy(documento => documento.Tipo)
+        .OrderByDescending(group => group.Count())
+        .Take(10);
+
+    Console.WriteLine("Top 10 tipos de documentos mais inseridos nos casos:");
+    foreach (var grupo in documentosPorTipo)
+    {
+        Console.WriteLine($"Tipo: {grupo.Key ?? "N/A"}, Quantidade: {grupo.Count()}");
+    }
+    Console.WriteLine();
+}
+
+
+
+
 
 }
 

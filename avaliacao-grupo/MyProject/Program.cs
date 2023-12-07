@@ -390,9 +390,16 @@ class Program
 
         Console.Write("Informe a data de encerramento do caso jurídico (DD/MM/AAAA): ");
         DateTime encerramentoCasoJuridico;
+        
         try
         {
             encerramentoCasoJuridico = DateTime.ParseExact(Console.ReadLine() ?? "", "dd/MM/yyyy", null);
+
+            if (encerramentoCasoJuridico <= aberturaCasoJuridico)
+            {
+                Console.WriteLine("A data de encerramento deve ser maior que a data de abertura.");
+                return;
+            }
         }
         catch (FormatException)
         {
@@ -403,13 +410,37 @@ class Program
         List<Advogado>? advogados = SelecionarAdvogadosParaCaso();
         Cliente? cliente = SelecionarClienteParaCaso();
 
+
         Console.Write("Informe o status do caso (Em aberto, Concluído ou Arquivado): ");
         string status = Console.ReadLine() ?? "";
+        bool isValid = false;
+        do
+        {
+            isValid = isValidStatus(status);
+
+            if (isValid)
+                break;
+            else
+                Console.WriteLine("Status Inválido!!! Certifique-se de inserir um valor válido!!!"); ;
+
+            Console.Write("Informe o status do caso (Em aberto, Concluído ou Arquivado): ");
+            status = Console.ReadLine() ?? "";
+        } while (isValid == false);
+
 
         var novoCasoJuridico = new CasoJuridico(codigo, aberturaCasoJuridico, probabilidadeSucesso, documentos, custos, encerramentoCasoJuridico, advogados, cliente, status);
 
         escritorio.AdicionarCasoJuridico(novoCasoJuridico);
         Console.WriteLine("Caso Jurídico adicionado com sucesso!\n");
+    }
+
+    static bool isValidStatus(string status)
+    {
+        if (status == "Em aberto" || status == "Concluído" || status == "Arquivado")
+        {
+            return true;
+        }
+        return false;
     }
 
     static Documento AdicionarDocumentos()

@@ -326,7 +326,12 @@ public class Escritorio
         {
             foreach (var pagamento in cliente.pagamentos)
             {
-                Console.WriteLine($"Descrição: {pagamento.descricao}, Valor Bruto: {pagamento.valorBruto}, Desconto: {pagamento.desconto}, Data: {pagamento.data}");
+                if(pagamento.desconto == 0){
+                  Console.WriteLine($"Descrição: {pagamento.descricao}, Valor Bruto: {pagamento.valorBruto}, Desconto: {pagamento.desconto}, Data: {pagamento.data}");
+                }else{
+                    Console.WriteLine($"Descrição: {pagamento.descricao}, Valor Bruto: {pagamento.valorBruto}, Desconto: {pagamento.desconto}, Data: {pagamento.data}, Valor Líquido: {pagamento.valorBruto - pagamento.valorBruto* pagamento.desconto/100}");
+                }
+              
             }
         }
         else

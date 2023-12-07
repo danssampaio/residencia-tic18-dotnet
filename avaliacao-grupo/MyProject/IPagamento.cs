@@ -13,9 +13,6 @@ public interface IPagamento
    
 
    public void RealizarPagamento(double valor);
-
-   public void DescontoPagamento(double valor);
-
    
    
 }

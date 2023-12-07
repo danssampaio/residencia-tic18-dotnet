@@ -11,8 +11,9 @@ class App
             "1. Menu de Cliente\n" +
             "2. Menu de Advogado\n" +
             "3. Menu de Caso Jurídico\n" +
-            "4. Menu de Relatório\n" +
-            "5. Sair\n");
+            "4. Menu de Pagamentos\n" +
+            "5. Menu de Relatório\n" +
+            "6. Sair\n");
 
             Console.Write("Escolha uma opção: ");
             string opcaoMenuPrincipal = Console.ReadLine() ?? "";
@@ -31,9 +32,12 @@ class App
                     MenuCasoJuridico();
                     break;
                 case "4":
-                    MenuRelatorio();
+                    MenuPagamentos();
                     break;
                 case "5":
+                    MenuRelatorio();
+                    break;
+                case "6":
                     Environment.Exit(0);
                     break;
                 default:

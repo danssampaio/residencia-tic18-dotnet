@@ -22,9 +22,6 @@ public class CartaoCredito : IPagamento{
    public void RealizarPagamento(double valor){
       Console.WriteLine($"Pagamento de {valor} realizado com cartão de crédito");
    }
-   public void DescontoPagamento(double valor){
-      Console.WriteLine($"Pagamento de {valor} realizado com cartão de crédito");
-   }
 }
 
 
@@ -53,10 +50,7 @@ public class PixBancario: IPagamento{
       Console.WriteLine($"Pagamento de {valor} realizado com transferência por pix");
    }
 
-   
-   public void DescontoPagamento(double valor){
-      Console.WriteLine($"Pagamento de {valor} realizado com cartão de crédito");
-   }
+
 }
 
 public class PagamentoEmDinheiro : IPagamento{
@@ -79,9 +73,6 @@ public class PagamentoEmDinheiro : IPagamento{
       Console.WriteLine($"Pagamento de {valor} realizado em dinheiro");
    }
 
-   
-   public void DescontoPagamento(double valor){
-      Console.WriteLine($"Pagamento de {valor} realizado com cartão de crédito");
-   }
+
    
 }

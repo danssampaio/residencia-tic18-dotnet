@@ -37,13 +37,15 @@ public class PixBancario: IPagamento{
    public string chavePix {get; set;}
    public string tipoChave {get; set;}
 
-    public PixBancario( string descricao, double valorBruto, double desconto, DateTime data)
+    public PixBancario( string descricao, double valorBruto, double desconto, DateTime data, string chave, string tipo)
     {
 
          this.descricao = descricao;
          this.valorBruto = valorBruto;
          this.desconto = desconto;
          this.data = data;
+         this.tipoChave = tipo;
+         this.chavePix = chave;
     }
 
 

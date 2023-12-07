@@ -3,7 +3,7 @@ class App
 {
     static Escritorio escritorio = new Escritorio();
 
-    static void Main(string[] args)
+    public static void Init()
     {
         while (true)
         {
@@ -107,7 +107,7 @@ class App
                     Console.WriteLine();
                     break;
                 case "2":
-                    escritorio.ListarPagamentos();
+                    ListarPagamentoCliente();
                     Console.WriteLine();
                     break;
                 case "3":
@@ -169,14 +169,85 @@ class App
             Console.WriteLine("Informe a data do pagamento");
             DateTime DataPagamento = DateTime.ParseExact(Console.ReadLine() ?? "", "dd/MM/yyyy", null);
 
+            Console.WriteLine("Informe o cpf do cliente");
+            string cpf = Console.ReadLine() ?? "";
+
     
-            PagamentoEmDinheiro pagamentoEmDinheiro = new PagamentoEmDinheiro();
+            PagamentoEmDinheiro pagamentoEmDinheiro = new PagamentoEmDinheiro(descricaoPagamento, valorPagamento, desconto, DataPagamento);
             pagamentoEmDinheiro.RealizarPagamento(valorPagamento);
-            escritorio.AdicionarPagamento(pagamentoEmDinheiro);
+            escritorio.AdicionarPagamentoDinheiro(pagamentoEmDinheiro, cpf);
             Console.WriteLine();
     }
 
+    static void AdicionarPagamentoCartaoCredito(){
+            
+            
+            Console.Write("Informe o valor do pagamento: ");
+            double valorPagamento = double.Parse(Console.ReadLine() ?? "0");
+    
+            Console.Write("Informe a descrição do pagamento: ");
+            string descricaoPagamento = Console.ReadLine() ?? "";
 
+            Console.WriteLine("informe o Desconto");
+            double desconto = double.Parse(Console.ReadLine() ?? "0");
+
+            Console.WriteLine("Informe a data do pagamento");
+            DateTime DataPagamento = DateTime.ParseExact(Console.ReadLine() ?? "", "dd/MM/yyyy", null);
+
+            Console.WriteLine("Informe o número do cartão");
+            string numeroCartao = Console.ReadLine() ?? "";
+
+            Console.WriteLine("Informe o cpf do cliente");
+            string cpf = Console.ReadLine() ?? "";
+
+
+    
+            CartaoCredito pagamentoCartaoCredito = new CartaoCredito(numeroCartao, descricaoPagamento, valorPagamento, desconto, DataPagamento);
+            pagamentoCartaoCredito.RealizarPagamento(valorPagamento);
+            escritorio.AdicionarPagamentoCartao(pagamentoCartaoCredito, cpf);
+            Console.WriteLine();
+
+
+    }
+
+    
+    static void AdicionarPagamentoPix(){
+
+            Console.Write("Informe o valor do pagamento: ");
+            double valorPagamento = double.Parse(Console.ReadLine() ?? "0");
+    
+            Console.Write("Informe a descrição do pagamento: ");
+            string descricaoPagamento = Console.ReadLine() ?? "";
+
+            Console.WriteLine("informe o Desconto");
+            double desconto = double.Parse(Console.ReadLine() ?? "0");
+
+            Console.WriteLine("Informe a data do pagamento");
+            DateTime DataPagamento = DateTime.ParseExact(Console.ReadLine() ?? "", "dd/MM/yyyy", null);
+
+            Console.WriteLine("Informe o tipo de chave");
+            string tipoChave = Console.ReadLine() ?? "";
+
+            Console.WriteLine("Informe a chave pix");
+            string chavePix = Console.ReadLine() ?? "";
+
+            Console.WriteLine("Informe o cpf do cliente");
+            string cpf = Console.ReadLine() ?? "";
+
+
+    
+            PixBancario pagamentoPix = new PixBancario(descricaoPagamento, valorPagamento, desconto, DataPagamento,chavePix, tipoChave);
+            pagamentoPix.RealizarPagamento(valorPagamento);
+            escritorio.AdicionarPagamentoPix(pagamentoPix, cpf);
+            Console.WriteLine();
+    }
+
+    public static void ListarPagamentoCliente(){
+        Console.WriteLine("Informe o cpf do cliente");
+        string cpf = Console.ReadLine() ?? "";
+
+        escritorio.ListarPagamentos(cpf);
+    }
 
 
     static void MenuAdvogado()
@@ -422,7 +493,7 @@ class App
         Console.Write("Profissão: ");
         string profissao = Console.ReadLine() ?? "";
 
-        Cliente cliente = new Cliente(nome, dataNascimento, cpf, estadoCivil, profissao);
+        Cliente cliente = new Cliente(nome, dataNascimento, cpf, estadoCivil, profissao, null, null);
         escritorio.AdicionarCliente(cliente);
         Console.WriteLine();
     }

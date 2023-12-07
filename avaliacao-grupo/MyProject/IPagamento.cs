@@ -2,7 +2,7 @@ namespace EscritorioJuridico;
 public interface IPagamento
 {
 
-   public string descricao {get; set;}
+   public string? descricao {get; set;}
 
    public double valorBruto {get; set;}
 

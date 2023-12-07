@@ -37,7 +37,7 @@ class Program
                     Environment.Exit(0);
                     break;
                 default:
-                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    Console.WriteLine("Opção inválida. Tente novamente.\n");
                     break;
             }
         }
@@ -77,7 +77,7 @@ class Program
                 case "4":
                     return;
                 default:
-                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    Console.WriteLine("Opção inválida. Tente novamente.\n");
                     break;
             }
         }
@@ -115,7 +115,7 @@ class Program
                 case "4":
                     return;
                 default:
-                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    Console.WriteLine("Opção inválida. Tente novamente.\n");
                     break;
             }
         }
@@ -171,29 +171,29 @@ class Program
                     Console.WriteLine();
                     break;
                 case "7":
-                        ConsultaCasosEmAberto();
-                        Console.WriteLine();
-                        break;
-                    case "8":
-                        ConsultaAdvogadosPorQuantidadeCasosConcluidos();
-                        Console.WriteLine();
-                        break;
-                    case "9":
-                        Console.Write("Informe a palavra desejada para consulta: ");
-                        string palavraConsulta = Console.ReadLine() ?? "";
-                        ConsultaCasosComCustoPorPalavra(palavraConsulta);
-                        Console.WriteLine();
-                        break;
-                    case "10":
-                        ConsultaTop10TiposDocumentos();
-                        Console.WriteLine();
-                        break;
-                    case "11":
-                        return;
-                    default:
-                        Console.WriteLine("Opção inválida. Tente novamente.");
-                        break;
-               
+                    ConsultaCasosEmAberto();
+                    Console.WriteLine();
+                    break;
+                case "8":
+                    ConsultaAdvogadosPorQuantidadeCasosConcluidos();
+                    Console.WriteLine();
+                    break;
+                case "9":
+                    Console.Write("Informe a palavra desejada para consulta: ");
+                    string palavraConsulta = Console.ReadLine() ?? "";
+                    ConsultaCasosComCustoPorPalavra(palavraConsulta);
+                    Console.WriteLine();
+                    break;
+                case "10":
+                    ConsultaTop10TiposDocumentos();
+                    Console.WriteLine();
+                    break;
+                case "11":
+                    return;
+                default:
+                    Console.WriteLine("Opção inválida. Tente novamente.\n");
+                    break;
+
             }
         }
     }
@@ -205,8 +205,9 @@ class Program
             Console.WriteLine("---- Menu de Casos Jurídicos ---- \n" +
             "1. Adicionar Caso Jurídico\n" +
             "2. Listar Casos Jurídicos\n" +
-            "3. Deletar Caso Jurídico\n" +
-            "4. Voltar ao Menu Principal\n");
+            "3. Atualizar Casos Jurídicos\n" +
+            "4. Deletar Caso Jurídico\n" +
+            "5. Voltar ao Menu Principal\n");
 
             Console.Write("Escolha uma opção: ");
             string opcaoMenuCasoJuridico = Console.ReadLine() ?? "";
@@ -216,67 +217,32 @@ class Program
             switch (opcaoMenuCasoJuridico)
             {
                 case "1":
-                    //AdicionarCasoJuridico();
+                    AdicionarCasoJuridico();
                     Console.WriteLine();
                     break;
                 case "2":
-                    //escritorio.ListarCasosJuridicos();
+                    ListarCasos();
                     Console.WriteLine();
                     break;
                 case "3":
-                    //AtualizarCasoJuridico();
+                    AtualizarCasoJuridico();
                     Console.WriteLine();
                     break;
                 case "4":
+                    DeletarCasoJuridico();
+                    Console.WriteLine();
+                    break;
+                case "5":
                     return;
                 default:
-                    Console.WriteLine("Opção inválida. Tente novamente.");
+                    Console.WriteLine("Opção inválida. Tente novamente.\n");
                     break;
             }
         }
     }
 
-    static void MenuDocumento()
-    {
-        while (true)
-        {
-            Console.WriteLine("---- Menu de Documentos ---- \n" +
-            "1. Adicionar Documento\n" +
-            "2. Listar Documentos\n" +
-            "3. Deletar Documento\n" +
-            "4. Voltar ao Menu Principal\n");
-
-            Console.Write("Escolha uma opção: ");
-            string opcaoMenuDocumento = Console.ReadLine() ?? "";
-
-            Console.WriteLine();
-
-            switch (opcaoMenuDocumento)
-            {
-                case "1":
-                    AdicionarDocumento();
-                    Console.WriteLine();
-                    break;
-                case "2":
-                    ListarDocumentos();
-                    Console.WriteLine();
-                    break;
-                case "3":
-                    DeletarDocumento();
-                    Console.WriteLine();
-                    break;
-                case "4":
-                    return;
-                default:
-                    Console.WriteLine("Opção inválida. Tente novamente.");
-                    break;
-            }
-        }
-    }
-
-    
     // ----- Funções Advogado -------
-    
+
     static void AdicionarAdvogado()
     {
         Console.Write("Nome: ");
@@ -290,7 +256,7 @@ class Program
         }
         catch (FormatException)
         {
-            Console.WriteLine("Formato de data inválido. Certifique-se de usar o formato DD/MM/AAAA.");
+            Console.WriteLine("Formato de data inválido. Certifique-se de usar o formato DD/MM/AAAA.\n");
             return;
         }
 
@@ -298,7 +264,7 @@ class Program
         string cpf = Console.ReadLine() ?? "";
         if (!ValidarCPF(cpf))
         {
-            Console.WriteLine("CPF inválido. Certifique-se de inserir um CPF válido.");
+            Console.WriteLine("CPF inválido. Certifique-se de inserir um CPF válido.\n");
             return;
         }
 
@@ -320,7 +286,7 @@ class Program
     }
 
     // ------- Funções Cliente -------
-    
+
     static void AdicionarCliente()
     {
         Console.Write("Nome: ");
@@ -334,7 +300,7 @@ class Program
         }
         catch (FormatException)
         {
-            Console.WriteLine("Formato de data inválido. Certifique-se de usar o formato DD/MM/AAAA.");
+            Console.WriteLine("Formato de data inválido. Certifique-se de usar o formato DD/MM/AAAA.\n");
             return;
         }
 
@@ -342,7 +308,7 @@ class Program
         string cpf = Console.ReadLine() ?? "";
         if (!ValidarCPF(cpf))
         {
-            Console.WriteLine("CPF inválido. Certifique-se de inserir um CPF válido.");
+            Console.WriteLine("CPF inválido. Certifique-se de inserir um CPF válido.\n");
             Console.WriteLine();
             return;
         }
@@ -352,7 +318,7 @@ class Program
 
         if (!ValidarEstadoCivil(estadoCivil))
         {
-            Console.WriteLine("Estado civíl inválido. Certifique-se de inserir um estado civíl válido.");
+            Console.WriteLine("Estado civíl inválido. Certifique-se de inserir um estado civíl válido.\n");
             Console.WriteLine();
             return;
         }
@@ -378,82 +344,214 @@ class Program
 
     static void AdicionarCasoJuridico()
     {
-        // Implementar a lógica para iniciar um caso jurídico de acordo com as regras de negócio
-        
+        Console.WriteLine("\n---- Adicionar Caso Jurídico ----");
+
+        Console.Write("Informe o código do caso: ");
+        string codigo = Console.ReadLine() ?? "";
+
+        Console.Write("Informe a data de abertura do caso jurídico (DD/MM/AAAA): ");
+        DateTime aberturaCasoJuridico;
+
+        try
+        {
+            aberturaCasoJuridico = DateTime.ParseExact(Console.ReadLine() ?? "", "dd/MM/yyyy", null);
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Formato de data inválido. Certifique-se de usar o formato DD/MM/AAAA.");
+            return;
+        }
+
+        Console.Write("Informe a probabilidade de sucesso do caso jurídico: ");
+        float probabilidadeSucesso;
+
+        if (!float.TryParse(Console.ReadLine(), out probabilidadeSucesso))
+        {
+            Console.WriteLine("Valor inválido para a probabilidade de sucesso. Certifique-se de inserir um número.\n");
+            return;
+        }
+
+        List<(DateTime DataDeModificacao, int Codigo, string? Tipo, string? Descricao)> documentos = new List<(DateTime, int, string?, string?)>();
+
+
+        Console.Write("Deseja adicionar documentos ao caso jurídico? (S/N): ");
+        string respostaDocumentos = Console.ReadLine()?.ToUpper() ?? "";
+
+        while (respostaDocumentos == "S")
+        {
+            Documento novoDocumento = AdicionarDocumentos();
+            documentos.Add((novoDocumento.DataDeModificacao, novoDocumento.Codigo, novoDocumento.Tipo, novoDocumento.Descricao));
+
+            Console.Write("Deseja adicionar mais documentos? (S/N): ");
+            respostaDocumentos = Console.ReadLine()?.ToUpper() ?? "";
+        }
+
+        List<(float Custos, string Descricao)> custos = AdicionarCustos();
+
+        Console.Write("Informe a data de encerramento do caso jurídico (DD/MM/AAAA): ");
+        DateTime encerramentoCasoJuridico;
+        try
+        {
+            encerramentoCasoJuridico = DateTime.ParseExact(Console.ReadLine() ?? "", "dd/MM/yyyy", null);
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Formato de data inválido. Certifique-se de usar o formato DD/MM/AAAA.\n");
+            return;
+        }
+
+        List<Advogado>? advogados = SelecionarAdvogadosParaCaso();
+        Cliente? cliente = SelecionarClienteParaCaso();
+
+        Console.Write("Informe o status do caso (Em aberto, Concluído ou Arquivado): ");
+        string status = Console.ReadLine() ?? "";
+
+        var novoCasoJuridico = new CasoJuridico(codigo, aberturaCasoJuridico, probabilidadeSucesso, documentos, custos, encerramentoCasoJuridico, advogados, cliente, status);
+
+        escritorio.AdicionarCasoJuridico(novoCasoJuridico);
+        Console.WriteLine("Caso Jurídico adicionado com sucesso!\n");
+    }
+
+    static Documento AdicionarDocumentos()
+    {
+        Console.WriteLine("\n---- Adicionar Documento ----");
+
+        Console.Write("Código: ");
+        int codigo = int.Parse(Console.ReadLine() ?? "0");
+
+        Console.Write("Tipo: ");
+        string tipo = Console.ReadLine() ?? "";
+
+        Console.Write("Descrição: ");
+        string descricao = Console.ReadLine() ?? "";
+
+        Documento documento = new Documento(DateTime.Now, codigo, tipo, descricao);
+        Console.WriteLine();
+        return documento;
+    }
+
+
+    static List<Advogado> SelecionarAdvogadosParaCaso()
+    {
+        Console.WriteLine("\n---- Selecionar Advogados para o Caso ----");
+        escritorio.ListarAdvogados();
+
+        List<Advogado> advogadosSelecionados = new List<Advogado>();
+
+        Console.Write("Informe o CPF do advogado que deseja adicionar (ou '0' para encerrar): ");
+        string cpfAdvogado = Console.ReadLine() ?? "";
+
+        while (cpfAdvogado != "0")
+        {
+            Advogado? advogadoSelecionado = escritorio.Advogados.FirstOrDefault(a => a.CPF == cpfAdvogado);
+
+            if (advogadoSelecionado != null)
+            {
+                advogadosSelecionados.Add(advogadoSelecionado);
+                Console.WriteLine($"Advogado {advogadoSelecionado.Nome} adicionado ao caso jurídico.");
+            }
+            else
+            {
+                Console.WriteLine("Advogado não encontrado. Certifique-se de inserir um CPF válido.");
+            }
+
+            Console.Write("Informe o CPF do próximo advogado (ou '0' para encerrar): ");
+            cpfAdvogado = Console.ReadLine() ?? "";
+            Console.WriteLine();
+        }
+
+        Console.WriteLine();
+        return advogadosSelecionados;
+    }
+
+    static Cliente SelecionarClienteParaCaso()
+    {
+        Console.WriteLine("\n---- Selecionar Cliente para o Caso ----");
+        escritorio.ListarClientes();
+
+        Console.Write("Informe o CPF do cliente que deseja adicionar ao caso jurídico: ");
+        string cpfCliente = Console.ReadLine() ?? "";
+
+        Cliente? clienteSelecionado = escritorio.Clientes != null ? escritorio.Clientes.FirstOrDefault(c => c.CPF == cpfCliente) : null;
+
+
+        if (clienteSelecionado != null)
+        {
+            Console.WriteLine($"Cliente {clienteSelecionado.Nome} adicionado ao caso jurídico.");
+            return clienteSelecionado;
+        }
+        else
+        {
+            Console.WriteLine("Cliente não encontrado. Certifique-se de inserir um CPF válido.\n");
+            return null;
+        }
+    }
+
+    static List<(float Custos, string Descricao)> AdicionarCustos()
+    {
+        List<(float Custos, string Descricao)> custos = new List<(float Custos, string Descricao)>();
+
+        while (true)
+        {
+            Console.Write("Informe o valor do custo: ");
+            float valorCusto;
+
+            if (!float.TryParse(Console.ReadLine(), out valorCusto))
+            {
+                Console.WriteLine("Valor de custo inválido. Certifique-se de inserir um número.");
+                continue;
+            }
+
+            Console.Write("Informe a descrição do custo: ");
+            string descricaoCusto = Console.ReadLine() ?? "";
+
+            custos.Add((valorCusto, descricaoCusto));
+
+            Console.Write("Deseja adicionar mais custos? (S/N): ");
+            string resposta = Console.ReadLine()?.ToUpper() ?? "";
+
+            if (resposta != "S")
+                break;
+        }
+
+        Console.WriteLine();
+
+        return custos;
+    }
+
+    static void DeletarCasoJuridico()
+    {
+        Console.Write("\nDigite o código do caso jurídico a ser deletado: ");
+        string codigoCasoJuridico = Console.ReadLine() ?? "";
+
+        escritorio.DeletarCasoJuridico(codigoCasoJuridico);
+        Console.WriteLine();
+    }
+
+    static void ListarCasos()
+    {
+        escritorio.ListarCasosJuridicos();
     }
 
     static void AtualizarCasoJuridico()
     {
-        // Implementar a lógica para atualizar um caso jurídico de acordo com as regras de negócio
+        Console.Write("\nInforme o codigo do caso: ");
+        string codigo = Console.ReadLine() ?? "";
+
+        Console.Write("Informe o status do caso (Em aberto, Concluído ou Arquivado): ");
+        string novoStatus = Console.ReadLine() ?? "";
+
+        if (novoStatus == "Em Aberto" || novoStatus == "Concluído" || novoStatus == "Arquivado")
+            escritorio.AtualizarCasoJuridico(codigo, novoStatus);
+        else
+        {
+            Console.WriteLine("Status Inválido. Informe o status correto!!\n");
+            return;
+        }
     }
-
-    static void ListarCasosJuridicos()
-    {
-        // Implementar a lógica para listar os casos juridicos
-    }
-
-    // ------- Funções Documento --------//
-
-    static Documento AdicionarDocumento()
-    {
-        // Implementar a lógica para adicionar um documento de acordo com as regras de negócio
-        var DataDeModificacao = DateTime.Now;
-
-        Console.WriteLine($"Codigo: ");
-        int codigo = int.Parse(Console.ReadLine() ?? "0");
-
-        Console.WriteLine($"Tipo: ");
-        string tipo = Console.ReadLine() ?? "";
-
-        Console.WriteLine($"Descrição: ");
-        string descricao = Console.ReadLine() ?? "";
-
-        Documento documento = new Documento(DataDeModificacao, codigo, tipo, descricao);
-        return documento;  
-    }
-
-    static void ListarDocumentos()
-    {
-        // Implementar a lógica para listar os documentos
-        foreach (var casojuridico in escritorio.CasosJuridicos)
-                    {
-                        foreach (var documento in casojuridico.Documentos)
-                        {
-                            Console.WriteLine($"Código: {documento.Codigo}");
-                            Console.WriteLine($"Tipo: {documento.Tipo ?? "N/A"}");
-                            Console.WriteLine($"Descrição: {documento.Descricao ?? "N/A"}");
-                            Console.WriteLine($"Data de Modificação: {documento.DataDeModificacao:dd/MM/yyyy}");
-                            Console.WriteLine();
-                        }
-                        Console.WriteLine();
-                    }
-    }
-
-    static void DeletarDocumento()
-    {
-        // Implementar a lógica para deletar um documento de acordo com as regras de negócio
-        Console.WriteLine("Digite o código do documento a ser deletado: ");
-        int codigoDocumento = int.Parse(Console.ReadLine() ?? "0");
-        foreach (var casojuridico in escritorio.CasosJuridicos)
-                    {
-                        foreach (var documento in casojuridico.Documentos)
-                        {
-                            if (documento.Codigo == codigoDocumento)
-                            {
-                                casojuridico.Documentos.Remove(documento);
-                                Console.WriteLine("Documento deletado com sucesso!!!\n");
-                            }
-                            else
-                            {
-                                throw new DocumentoNaoEncontradoException();
-                            }
-                        }
-                    }
-    }
-    
 
     // ------- Validações -------
-    
+
     static bool ValidarCPF(string cpf)
     {
         if (cpf.Length == 11 && cpf.All(char.IsDigit))
@@ -470,9 +568,9 @@ class Program
             return false;
     }
 
-    
+
     // ------- Relatórios -------
-    
+
     static void RelatorioAdvogadosPorIdade()
     {
         Console.Write("Informe a idade mínima: ");
@@ -582,68 +680,64 @@ class Program
         Console.WriteLine();
     }
     static void ConsultaCasosEmAberto()
-{
-    var casosEmAberto = escritorio.CasosJuridicos
-        .Where(caso => caso.Status?.Equals("Em aberto", StringComparison.OrdinalIgnoreCase) == true)
-        .OrderBy(caso => caso.Abertura);
-
-    Console.WriteLine("Casos em aberto em ordem crescente pela data de início:");
-    foreach (var caso in casosEmAberto)
     {
-        Console.WriteLine($"Data de Início: {caso.Abertura:dd/MM/yyyy}, Status: {caso.Status ?? "N/A"}");
+        var casosEmAberto = escritorio.CasosJuridicos
+            .Where(caso => caso.Status?.Equals("Em aberto", StringComparison.OrdinalIgnoreCase) == true)
+            .OrderBy(caso => caso.Abertura);
+
+        Console.WriteLine("Casos em aberto em ordem crescente pela data de início:");
+        foreach (var caso in casosEmAberto)
+        {
+            caso.ExibirInformacoesCaso();
+        }
+        Console.WriteLine();
     }
-    Console.WriteLine();
-}
 
-static void ConsultaAdvogadosPorQuantidadeCasosConcluidos()
-{
-    var advogadosPorQuantidadeCasosConcluidos = escritorio.Advogados
-        .OrderByDescending(advogado => escritorio.CasosJuridicos
-            .Count(caso => caso.Status?.Equals("Concluído", StringComparison.OrdinalIgnoreCase) == true && caso.Advogados.Any(adv => adv == advogado)));
-
-    Console.WriteLine("Advogados em ordem decrescente pela quantidade de casos concluídos:");
-    foreach (var advogado in advogadosPorQuantidadeCasosConcluidos)
+    static void ConsultaAdvogadosPorQuantidadeCasosConcluidos()
     {
-        int casosConcluidos = escritorio.CasosJuridicos
-            .Count(caso => caso.Status?.Equals("Concluído", StringComparison.OrdinalIgnoreCase) == true && caso.Advogados.Any(adv => adv == advogado));
+        var advogadosPorQuantidadeCasosConcluidos = escritorio.Advogados
+            .OrderByDescending(advogado => escritorio.CasosJuridicos
+                .Count(caso => caso.Status?.Equals("Concluído", StringComparison.OrdinalIgnoreCase) == true && caso.Advogados.Any(adv => adv == advogado)));
 
-        Console.WriteLine($"Nome: {advogado.Nome}, Casos Concluídos: {casosConcluidos}");
+        Console.WriteLine("Advogados em ordem decrescente pela quantidade de casos concluídos:");
+        foreach (var advogado in advogadosPorQuantidadeCasosConcluidos)
+        {
+            int casosConcluidos = escritorio.CasosJuridicos
+                .Count(caso => caso.Status?.Equals("Concluído", StringComparison.OrdinalIgnoreCase) == true && caso.Advogados.Any(adv => adv == advogado));
+
+            Console.WriteLine($"Nome: {advogado.Nome}, Casos Concluídos: {casosConcluidos}");
+        }
+        Console.WriteLine();
     }
-    Console.WriteLine();
-}
-static void ConsultaCasosComCustoPorPalavra(string palavra)
-{
-    var casosComCustoPorPalavra = escritorio.CasosJuridicos
-        .Where(caso => caso.Custos?.Any(custo => custo.Descricao?.Contains(palavra, StringComparison.OrdinalIgnoreCase) == true) == true);
-
-    Console.WriteLine($"Casos com custo contendo a palavra '{palavra}':");
-    foreach (var caso in casosComCustoPorPalavra)
+    static void ConsultaCasosComCustoPorPalavra(string palavra)
     {
-        Console.WriteLine($"Data de Início: {caso.Abertura:dd/MM/yyyy}, Status: {caso.Status ?? "N/A"}");
+        var casosComCustoPorPalavra = escritorio.CasosJuridicos
+            .Where(caso => caso.Custos?.Any(custo => custo.Descricao?.Contains(palavra, StringComparison.OrdinalIgnoreCase) == true) == true);
+
+        Console.WriteLine($"Casos com custo contendo a palavra '{palavra}':");
+        foreach (var caso in casosComCustoPorPalavra)
+        {
+            Console.WriteLine($"Data de Início: {caso.Abertura:dd/MM/yyyy}, Status: {caso.Status ?? "N/A"}");
+        }
+        Console.WriteLine();
     }
-    Console.WriteLine();
-}
 
 
-static void ConsultaTop10TiposDocumentos()
-{
-    var documentosPorTipo = escritorio.CasosJuridicos
-        .SelectMany(caso => caso.Documentos)
-        .GroupBy(documento => documento.Tipo)
-        .OrderByDescending(group => group.Count())
-        .Take(10);
-
-    Console.WriteLine("Top 10 tipos de documentos mais inseridos nos casos:");
-    foreach (var grupo in documentosPorTipo)
+    static void ConsultaTop10TiposDocumentos()
     {
-        Console.WriteLine($"Tipo: {grupo.Key ?? "N/A"}, Quantidade: {grupo.Count()}");
+        var documentosPorTipo = escritorio.CasosJuridicos
+            .SelectMany(caso => caso.Documentos)
+            .GroupBy(documento => documento.Tipo)
+            .OrderByDescending(group => group.Count())
+            .Take(10);
+
+        Console.WriteLine("Top 10 tipos de documentos mais inseridos nos casos:");
+        foreach (var grupo in documentosPorTipo)
+        {
+            Console.WriteLine($"Tipo: {grupo.Key ?? "N/A"}, Quantidade: {grupo.Count()}");
+        }
+        Console.WriteLine();
     }
-    Console.WriteLine();
-}
-
-
-
-
 
 }
 
@@ -660,11 +754,6 @@ public class RepeatedRegisterAttorneyException : Exception
 public class RepeatedRegisterClientException : Exception
 {
     public RepeatedRegisterClientException() : base("CPF já cadastrado.") { }
-}
-
-public class DocumentoNaoEncontradoException : Exception
-{
-    public DocumentoNaoEncontradoException() : base("Documento não encontrado.") { }
 }
 
 public class CustoNaoEncontradoException : Exception

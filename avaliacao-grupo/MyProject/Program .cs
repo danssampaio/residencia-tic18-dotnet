@@ -389,8 +389,16 @@ class Program
         Console.WriteLine($"Qual a probabilidade de sucesso do caso? (0-100): ");
         float probabilidadeDeSucesso = float.Parse(Console.ReadLine() ?? "0");
         string status = "Aberto";
+        Console.WriteLine($"informe o cpf do cliente: ");
+        string cpfCliente = Console.ReadLine() ?? "";
+        
+        var clienteAux = escritorio.Clientes.FirstOrDefault(i => i.CPF == "cpf");
+        if (clienteAux == null)
+        {
+            Console.WriteLine("Cliente não encontrado");
+            return;
+        }
 
-        Cliente clienteAux = new Cliente("nome", DateTime.Now, "cpf", "estadoCivil", "profissao");
         CasoJuridico casoJuridico = new CasoJuridico(abertura, probabilidadeDeSucesso, clienteAux, status);
     }
 
@@ -434,10 +442,12 @@ class Program
                     }
     }
 
+    /*
     static void ListarCasosJuridicos()
     {
         // Implementar a lógica para listar os casos juridicos
     }
+    */
 
     // ------- Funções Documento --------//
 

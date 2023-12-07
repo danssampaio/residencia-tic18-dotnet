@@ -233,4 +233,111 @@ public class Escritorio
         Console.WriteLine("------------------------------------------------------");
     }
 
+    public void AdicionarPagamentoDinheiro(PagamentoEmDinheiro pagamentoEmDinheiro, string cpf)
+    {
+        try
+        {
+            var cliente = clientes.Find(c => c.CPF == cpf);
+
+            if (cliente != null)
+            {
+                cliente.pagamentos.Add(pagamentoEmDinheiro);
+                Console.WriteLine("Pagamento adicionado com sucesso!");
+            }
+            else
+            {
+                throw new CpfNotFoundException();
+            }
+        }
+        catch (CpfNotFoundException ex)
+        {
+            Console.WriteLine($"Erro ao adicionar pagamento: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro inesperado ao adicionar pagamento: {ex.Message}");
+        }
+        
+        
+    }
+
+    public void AdicionarPagamentoCartao(CartaoCredito cartaoDeCredito, string cpf)
+    {
+        try
+        {
+            var cliente = clientes.Find(c => c.CPF == cpf);
+
+            if (cliente != null)
+            {
+                cliente.pagamentos.Add(cartaoDeCredito);
+                Console.WriteLine("Pagamento adicionado com sucesso!");
+            }
+            else
+            {
+                throw new CpfNotFoundException();
+            }
+        }
+        catch (CpfNotFoundException ex)
+        {
+            Console.WriteLine($"Erro ao adicionar pagamento: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro inesperado ao adicionar pagamento: {ex.Message}");
+        }
+        
+        
+    }
+
+     public void AdicionarPagamentoPix(PixBancario pix, string cpf)
+    {
+        try
+        {
+            var cliente = clientes.Find(c => c.CPF == cpf);
+
+            if (cliente != null)
+            {
+                cliente.pagamentos.Add(pix);
+                Console.WriteLine("Pagamento adicionado com sucesso!");
+            }
+            else
+            {
+                throw new CpfNotFoundException();
+            }
+        }
+        catch (CpfNotFoundException ex)
+        {
+            Console.WriteLine($"Erro ao adicionar pagamento: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro inesperado ao adicionar pagamento: {ex.Message}");
+        }
+        
+        
+    }
+    
+    public void ListarPagamentos(string cpf){
+
+        
+        var cliente = clientes.Find(c => c.CPF == cpf);
+
+        if (cliente != null)
+        {
+            foreach (var pagamento in cliente.pagamentos)
+            {
+                if(pagamento.desconto == 0){
+                  Console.WriteLine($"Descrição: {pagamento.descricao}, Valor Bruto: {pagamento.valorBruto}, Desconto: {pagamento.desconto}, Data: {pagamento.data}");
+                }else{
+                    Console.WriteLine($"Descrição: {pagamento.descricao}, Valor Bruto: {pagamento.valorBruto}, Desconto: {pagamento.desconto}, Data: {pagamento.data}, Valor Líquido: {pagamento.valorBruto - pagamento.valorBruto* pagamento.desconto/100}");
+                }
+              
+            }
+        }
+        else
+        {
+            throw new CpfNotFoundException();
+        }
+    }
+
 }

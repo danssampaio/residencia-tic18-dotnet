@@ -205,8 +205,9 @@ class Program
             Console.WriteLine("---- Menu de Casos Jurídicos ---- \n" +
             "1. Adicionar Caso Jurídico\n" +
             "2. Listar Casos Jurídicos\n" +
-            "3. Deletar Caso Jurídico\n" +
-            "4. Voltar ao Menu Principal\n");
+            "3. Atualizar Caso Jurídico\n" +
+            "4. Deletar Caso Jurídico\n" +
+            "5. Voltar ao Menu Principal\n");
 
             Console.Write("Escolha uma opção: ");
             string opcaoMenuCasoJuridico = Console.ReadLine() ?? "";
@@ -228,6 +229,10 @@ class Program
                     Console.WriteLine();
                     break;
                 case "4":
+                    DeletarCasoJuridico();
+                    Console.WriteLine();
+                    break;
+                case "5":
                     return;
                 default:
                     Console.WriteLine("Opção inválida. Tente novamente.");
@@ -402,6 +407,25 @@ class Program
                         {
                             casojuridico.Status = novoStatus;
                             Console.WriteLine("Caso Jurídico atualizado com sucesso!");
+                        }
+                        else
+                        {
+                            throw new CpfNotFoundException();
+                        }
+                    }
+    }
+
+    static void DeletarCasoJuridico()
+    {
+        // Implementar a lógica para deletar um caso jurídico de acordo com as regras de negócio
+        Console.WriteLine("Digite a CPF do cliente do caso juridico a ser deletado: ");
+        string cpfCliente = Console.ReadLine() ?? "";
+        foreach (var casojuridico in escritorio.CasosJuridicos)
+                    {
+                        if (casojuridico.Cliente.CPF == cpfCliente)
+                        {
+                            escritorio.CasosJuridicos.Remove(casojuridico);
+                            Console.WriteLine("Caso Jurídico deletado com sucesso!");
                         }
                         else
                         {

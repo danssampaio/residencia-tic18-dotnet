@@ -220,11 +220,11 @@ class Program
                     Console.WriteLine();
                     break;
                 case "2":
-                    //escritorio.ListarCasosJuridicos();
+                    escritorio.ListarCasosJuridicos();
                     Console.WriteLine();
                     break;
                 case "3":
-                    //AtualizarCasoJuridico();
+                    AtualizarCasoJuridico();
                     Console.WriteLine();
                     break;
                 case "4":
@@ -392,6 +392,22 @@ class Program
     static void AtualizarCasoJuridico()
     {
         // Implementar a lógica para atualizar um caso jurídico de acordo com as regras de negócio
+        Console.WriteLine("Digite o cpf do cliente do caso juridico a ser atualizado: ");
+        string cpfCliente = Console.ReadLine() ?? "";
+        Console.WriteLine("Digite o novo status do caso juridico: ");
+        string novoStatus = Console.ReadLine() ?? "";
+        foreach (var casojuridico in escritorio.CasosJuridicos)
+                    {
+                        if (casojuridico.Cliente.CPF == cpfCliente)
+                        {
+                            casojuridico.Status = novoStatus;
+                            Console.WriteLine("Caso Jurídico atualizado com sucesso!");
+                        }
+                        else
+                        {
+                            throw new CpfNotFoundException();
+                        }
+                    }
     }
 
     static void ListarCasosJuridicos()

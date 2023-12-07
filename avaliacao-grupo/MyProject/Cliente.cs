@@ -5,11 +5,11 @@ namespace EscritorioJuridico
         public string EstadoCivil { get; set; }
         public string Profissao { get; set; }
 
-        public List<IPagamento> pagamentos {get; set;}
+        public List<IPagamento> pagamentos {get; set;} = new List<IPagamento>();
 
         public PlanoConsultoria? plano { get; set; }
 
-        public Cliente(string nome, DateTime dataNascimento, string cpf, string estadoCivil, string profissao, List<IPagamento>? pagamentos, PlanoConsultoria? plano)
+        public Cliente(string nome, DateTime dataNascimento, string cpf, string estadoCivil, string profissao, List<IPagamento> pagamentos, PlanoConsultoria? plano)
             : base(nome, dataNascimento, cpf)
         {
             EstadoCivil = estadoCivil;

@@ -184,6 +184,7 @@ public class Escritorio
 
     private void ExibirInformacoesCasoJuridico(CasoJuridico casoJuridico)
     {
+        Console.WriteLine("------------------------------------------------------");
         Console.WriteLine($"Código: {casoJuridico.Codigo:dd/MM/yyyy}");
         Console.WriteLine($"Abertura: {casoJuridico.Abertura:dd/MM/yyyy}");
         Console.WriteLine($"Probabilidade de Sucesso: {casoJuridico.ProbabilidadeSucesso}%");
@@ -229,6 +230,7 @@ public class Escritorio
 
             Console.WriteLine($"Total de Custos: {somaCustos}");
         }
+        Console.WriteLine("------------------------------------------------------");
     }
 
 }

@@ -119,6 +119,63 @@ class App
         }
     }
 
+    static void AdicionarPagamento(){
+
+        Console.WriteLine("---- Adicionar Pagamento ---- \n" +
+        "1. Adicionar Pagamento em Dinheiro\n" +
+        "2. Adicionar Pagamento com Cartão de Crédito\n" +
+        "3. Adicionar Pagamento com Pix\n" +
+        "4. Voltar ao Menu Principal\n");
+
+        Console.Write("Escolha uma opção: ");
+        string opcaoMenuPagamentos = Console.ReadLine() ?? "";
+
+        Console.WriteLine();
+
+        switch (opcaoMenuPagamentos)
+        {
+            case "1":
+                AdicionarPagamentoEmDinheiro();
+                Console.WriteLine();
+                break;
+            case "2":
+                AdicionarPagamentoCartaoCredito();
+                Console.WriteLine();
+                break;
+            case "3":
+                AdicionarPagamentoPix();
+                Console.WriteLine();
+                break;
+            case "4":
+                return;
+            default:
+                Console.WriteLine("Opção inválida. Tente novamente.\n");
+                break;
+        }
+
+    }
+
+    static void AdicionarPagamentoEmDinheiro(){
+            
+            Console.Write("Informe o valor do pagamento: ");
+            double valorPagamento = double.Parse(Console.ReadLine() ?? "0");
+    
+            Console.Write("Informe a descrição do pagamento: ");
+            string descricaoPagamento = Console.ReadLine() ?? "";
+
+            Console.WriteLine("informe o Desconto");
+            double desconto = double.Parse(Console.ReadLine() ?? "0");
+
+            Console.WriteLine("Informe a data do pagamento");
+            DateTime DataPagamento = DateTime.ParseExact(Console.ReadLine() ?? "", "dd/MM/yyyy", null);
+
+    
+            PagamentoEmDinheiro pagamentoEmDinheiro = new PagamentoEmDinheiro();
+            pagamentoEmDinheiro.RealizarPagamento(valorPagamento);
+            escritorio.AdicionarPagamento(pagamentoEmDinheiro);
+            Console.WriteLine();
+    }
+
 
 
 
@@ -641,6 +698,8 @@ class App
 
     // ------- Relatórios -------
 
+
+
     static void RelatorioAdvogadosPorIdade()
     {
         Console.Write("Informe a idade mínima: ");
@@ -716,6 +775,7 @@ class App
         Console.WriteLine();
     }
 
+    
     static void RelatorioClientesPorProfissao()
     {
         Console.Write("Informe o texto da profissão desejada: ");
